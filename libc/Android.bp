@@ -1539,15 +1539,8 @@ cc_library_static {
         "stdlib/atexit.c",
         "bionic/fork.cpp",
     ],
-    product_variables: {
-        lineage: {
-	    allows_invalid_pthread: {
-	        cppflags: ["-DALLOWS_INVALID_PTHREAD"],
-	    },
-        },
-    },
-    cppflags: ["-Wold-style-cast"],
 
+    cppflags: ["-Wold-style-cast"],
     include_dirs: ["bionic/libstdc++/include"],
     name: "libc_pthread",
 }
