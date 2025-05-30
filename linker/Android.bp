@@ -22,7 +22,10 @@ linker_common_flags = [
     "-Wextra",
     "-Wunused",
     "-Werror",
-]
+] +  select(soong_config_variable("linker", "ld_shim_libs"), {
+        any @ flag_val: ["-DLD_SHIM_LIBS=" + flag_val],
+                default: [],
+                    }
 
 // ========================================================
 // linker_wrapper - Linux Bionic (on the host)
@@ -76,9 +79,6 @@ cc_object {
 // Configuration for the linker binary and any of its static libraries.
 cc_defaults {
     name: "linker_defaults",
-    defaults: [
-        "shim_libs_defaults",
-    ],
     arch: {
         arm: {
             cflags: ["-D__work_around_b_24465209__"],
